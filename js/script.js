@@ -82,11 +82,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ─── SECTION PROGRESS INDICATOR ───
-  const spDots = document.querySelectorAll('.sp-dot');
-  const spFill = document.getElementById('spFill');
+  // ─── SECTION TABS ───
+  const stTabs = document.querySelectorAll('.st-tab');
+  const stIndicator = document.getElementById('stIndicator');
   const sections = document.querySelectorAll('section[id]');
-  if (spDots.length && sections.length) {
+  if (stTabs.length && sections.length) {
+    function updateActiveTab(id) {
+      stTabs.forEach(t => t.classList.toggle('active', t.dataset.section === id));
+      const active = document.querySelector('.st-tab.active');
+      if (active && stIndicator) {
+        stIndicator.style.left = active.offsetLeft + 'px';
+        stIndicator.style.width = active.offsetWidth + 'px';
+      }
+    }
+
     const sectionObs = new IntersectionObserver((entries) => {
       let maxVisible = 0;
       let activeId = '';
@@ -96,22 +105,18 @@ document.addEventListener('DOMContentLoaded', () => {
           activeId = entry.target.id;
         }
       });
-      if (activeId) {
-        spDots.forEach(d => d.classList.toggle('active', d.dataset.section === activeId));
-        if (spFill) {
-          const idx = Array.from(sections).findIndex(s => s.id === activeId);
-          spFill.style.height = ((idx + 1) / sections.length * 100) + '%';
-        }
-      }
+      if (activeId) updateActiveTab(activeId);
     }, { threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1] });
     sections.forEach(s => sectionObs.observe(s));
 
-    spDots.forEach(dot => {
-      dot.addEventListener('click', () => {
-        const target = document.getElementById(dot.dataset.section);
+    stTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const target = document.getElementById(tab.dataset.section);
         if (target) target.scrollIntoView({ behavior: 'smooth' });
       });
     });
+
+    updateActiveTab('hero');
   }
 
   // ─── GSAP SCROLL REVEALS ───
