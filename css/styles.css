@@ -630,6 +630,4 @@ section[id] { perspective: 1000px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--color-text-muted); }
 
 
-  filter: drop-shadow(0 0 12px rgba(255,255,255,0.12));
-}
 @media (prefers-reduced-motion: reduce) { .hero-grid { animation: none !important; } }
