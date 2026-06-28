@@ -119,16 +119,22 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       gsap.registerPlugin(ScrollTrigger);
 
-      gsap.utils.toArray('.section-header').forEach(header => {
-        const tl = gsap.timeline({ scrollTrigger: { trigger: header, start: 'top 85%', toggleActions: 'play none none none' } });
-        tl.from(header.querySelector('.section-eyebrow'), { opacity: 0, y: 20, duration: 0.35, ease: 'power1.out' });
-        tl.from(header.querySelector('.section-title'), { opacity: 0, y: 20, duration: 0.35, ease: 'power1.out' }, '-=0.2');
+      gsap.utils.toArray('.section-header').forEach((header) => {
+        const tl = gsap.timeline({
+          scrollTrigger: { trigger: header, start: 'top 80%', toggleActions: 'play none none none' }
+        });
+        tl.fromTo(header, { clipPath: 'inset(50% 0 50% 0)' }, { clipPath: 'inset(0 0 0 0)', duration: 0.6, ease: 'power3.out' });
+        tl.from(header.querySelector('.section-eyebrow'), { opacity: 0, y: 15, duration: 0.3 }, '-=0.35');
+        tl.from(header.querySelector('.section-title'), { opacity: 0, y: 15, duration: 0.3 }, '-=0.15');
       });
 
       gsap.utils.toArray('.about-card, .about-info, .project-card, .edu-card, .skill-category, .contact-card').forEach((el, i) => {
         gsap.from(el, {
           scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' },
-          opacity: 0, y: 30, duration: 0.35, delay: i * 0.04, ease: 'power1.out', force3D: true
+          scale: 0.6, y: 60, opacity: 0, rotateX: 8,
+          transformOrigin: 'center bottom',
+          duration: 0.55, delay: i * 0.06,
+          ease: 'back.out(1.4)', force3D: true
         });
       });
 
