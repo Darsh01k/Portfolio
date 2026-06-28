@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://formspree.io; frame-src 'self';">
+  <title>Darsh Yadav | Portfolio</title>
+  <meta property="og:title" content="Darsh Yadav | Portfolio">
+  <meta property="og:description" content="Computer Science Engineer & Full-Stack Developer — building intelligent systems with AI and web technologies.">
+  <meta property="og:image" content="https://clipcheck-ai.vercel.app/og-image.png">
+  <meta property="og:url" content="https://darshyadav.vercel.app">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Darsh Yadav Portfolio">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Darsh Yadav | Portfolio">
+  <meta name="twitter:description" content="Computer Science Engineer & Full-Stack Developer — from fact-checking platforms to healthcare ecosystems.">
+  <meta name="twitter:image" content="https://clipcheck-ai.vercel.app/og-image.png">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>DY</text></svg>">
+  <!-- Three.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r170/three.min.js"></script>
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</head>
+<body>
+
+  <!-- Loading Splash -->
+  <div id="loader">
+    <div class="loader-planet" id="loaderPlanet">
+      <div class="planet-body"></div>
+      <div class="planet-ring"></div>
+      <div class="planet-glow"></div>
+    </div>
+    <div class="loader-rocket-wrapper" id="loaderRocketWrapper">
+      <div class="loader-rocket" id="loaderRocket">
+        <img src="assets/images/cursor-icon.png" alt="Rocket">
+      </div>
+      <div class="loader-exhaust" id="loaderExhaust">
+        <div class="loader-flame loader-flame-1"></div>
+        <div class="loader-flame loader-flame-2"></div>
+        <div class="loader-flame loader-flame-3"></div>
+        <div class="loader-smoke"></div>
+      </div>
+    </div>
+    <div class="loader-text">Initializing...</div>
+  </div>
+  <!-- Section Progress Indicator -->
+  <div id="sectionProgress" class="section-progress">
+    <div class="sp-track">
+      <div class="sp-fill" id="spFill"></div>
+    </div>
+    <div class="sp-dots">
+      <div class="sp-dot active" data-section="hero"><span class="sp-label">Home</span></div>
+      <div class="sp-dot" data-section="about"><span class="sp-label">About</span></div>
+      <div class="sp-dot" data-section="projects"><span class="sp-label">Projects</span></div>
+      <div class="sp-dot" data-section="education"><span class="sp-label">Education</span></div>
+      <div class="sp-dot" data-section="skills"><span class="sp-label">Skills</span></div>
+      <div class="sp-dot" data-section="contact"><span class="sp-label">Contact</span></div>
+    </div>
+  </div>
+
+  <!-- Particle Canvas Background -->
+  <div id="particle-canvas"></div>
+
+  <!-- Custom Cursor -->
+  <div id="cursorRocket">
+    <img src="assets/images/cursor-icon.png" width="32" height="32" alt="Cursor">
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-content">
+      <a href="#hero" class="nav-logo">DY</a>
+      <ul class="nav-links">
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#education" class="nav-link">Education</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#" id="navResume" class="nav-link">Resume</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+      <div class="nav-right">
+        <a href="https://github.com/Darsh01k" target="_blank" rel="noopener noreferrer" class="nav-gh-link" aria-label="GitHub">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/darsh-yadav-31995331a" target="_blank" rel="noopener noreferrer" class="nav-gh-link" aria-label="LinkedIn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <span class="icon-wrap">
+            <svg class="sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+            <svg class="moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          </span>
+        </button>
+        <a href="#contact" class="btn btn-primary" style="padding:8px 18px;font-size:13px">Contact Me</a>
+        <button class="menu-btn" id="menuBtn" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div id="site-content">
+
+  <!-- Hero -->
+  <section id="hero" class="hero">
+    <div class="hero-bg">
+      <div class="gradient-mesh">
+        <div class="mesh-blob mesh-blob-1"></div>
+        <div class="mesh-blob mesh-blob-2"></div>
+        <div class="mesh-blob mesh-blob-3"></div>
+      </div>
+      <div class="grid-overlay"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Introducing</div>
+      <h1 class="hero-title">
+        Darsh <span class="gradient-text">Yadav</span>
+      </h1>
+      <div class="hero-typewriter">
+        <span id="typewriter"></span><span class="cursor-blink"></span>
+      </div>
+      <p class="hero-desc">
+        Building intelligent systems at the intersection of web development and AI &mdash; from fact-checking platforms to healthcare ecosystems.
+      </p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-primary">View Projects</a>
+        <a href="#" class="btn btn-warm" data-action="openResumeViewer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Resume
+        </a>
+        <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-number" data-target="2">0</span>
+          <span class="stat-label">Live Projects</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number" data-target="5">0</span>
+          <span class="stat-label">AI Tools Used</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number" data-target="2">0</span>
+          <span class="stat-label">Deploy Targets</span>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <span>SCROLL</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="section about">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">About</span>
+        <h2 class="section-title">Professional <span class="gradient-text">Summary</span></h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-card card">
+          <div class="about-quote">&ldquo;</div>
+          <p class="about-text">
+            Computer Engineering student with a CGPA of 7.44 and a strong foundation in <strong>Java</strong>, <strong>Python</strong>, <strong>MySQL</strong>, and <strong>Web Development</strong>. Built practical full-stack and AI-powered web applications using AI-assisted development, prompt engineering, and rapid prototyping workflows. Familiar with GitHub and deployment workflows using <strong>Vercel</strong>, <strong>Render</strong>, and <strong>Neon</strong>.
+          </p>
+          <p class="about-text">
+            Seeking entry-level opportunities as a <strong>Java Developer</strong>, <strong>Software Developer</strong>, or <strong>Full Stack Developer</strong> to apply technical skills, continue learning, and contribute to impactful projects.
+          </p>
+        </div>
+        <div class="about-info card">
+          <div class="info-item">
+            <span class="info-label">Name</span>
+            <span class="info-value">Darsh Yadav</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Phone</span>
+            <span class="info-value">+91-8141652007</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Email</span>
+            <span class="info-value">darshyadav078@gmail.com</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">GitHub</span>
+            <span class="info-value"><a href="https://github.com/Darsh01k" target="_blank" rel="noopener noreferrer">github.com/Darsh01k</a></span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">LinkedIn</span>
+            <span class="info-value"><a href="https://www.linkedin.com/in/darsh-yadav-31995331a" target="_blank" rel="noopener noreferrer">darsh-yadav</a></span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">CGPA</span>
+            <span class="info-value">7.44</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Status</span>
+            <span class="info-value"><span class="status-dot"></span> Open to Work</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- Projects -->
+  <section id="projects" class="section projects">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Projects</span>
+        <h2 class="section-title">Key <span class="gradient-text">Projects</span></h2>
+      </div>
+      <div class="projects-grid">
+        <div class="project-card card" data-project="clipcheck">
+          <div class="project-image">
+            <img src="assets/images/clipcheck.png" alt="ClipCheck" class="project-img" loading="lazy">
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span>AI</span>
+              <span>Node.js</span>
+              <span>Express</span>
+              <span>Vercel</span>
+              <span>Render</span>
+            </div>
+            <h3>ClipCheck</h3>
+            <p>AI-powered fact-checking platform that analyzes video links or text, extracts factual claims, verifies them against web sources, and generates structured reports with verdicts and evidence.</p>
+            <div class="project-links">
+              <a href="https://clipcheck-ai.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-link">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Live Demo
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card card" data-project="mediflow">
+          <div class="project-image">
+            <img src="assets/images/mediflow.png" alt="MediFlow" class="project-img" loading="lazy">
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span>Java</span>
+              <span>Spring Boot</span>
+              <span>React</span>
+              <span>PostgreSQL</span>
+              <span>Neon</span>
+            </div>
+            <h3>MediFlow</h3>
+            <p>Multi-role healthcare management platform connecting patients, doctors, hospitals, and administrators in one system for appointments, onboarding, profile management, and operational workflows.</p>
+            <div class="project-links">
+              <a href="https://mediflow-care.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-link">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Live Demo
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Education -->
+  <section id="education" class="section education">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Education</span>
+        <h2 class="section-title">Academic <span class="gradient-text">Background</span></h2>
+      </div>
+      <div class="edu-grid">
+        <div class="edu-card card">
+          <div class="edu-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.1 2.7 3 6 3s6-1.9 6-3v-5"/></svg>
+          </div>
+          <div class="edu-body">
+            <h3>B.Tech in Computer Science Engineering</h3>
+            <p class="edu-org">Uka Tarsadia University, Bardoli</p>
+            <span class="edu-date">2024 &ndash; Present</span>
+          </div>
+        </div>
+        <div class="edu-card card">
+          <div class="edu-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.1 2.7 3 6 3s6-1.9 6-3v-5"/></svg>
+          </div>
+          <div class="edu-body">
+            <h3>Diploma in Computer Engineering</h3>
+            <p class="edu-org">Government Polytechnic, Daman</p>
+            <span class="edu-date">2021 &ndash; 2024 | CGPA: 7.89</span>
+          </div>
+        </div>
+        <div class="edu-card card">
+          <div class="edu-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          </div>
+          <div class="edu-body">
+            <h3>Secondary School Certificate (SSC)</h3>
+            <p class="edu-org">Holy Trinity Secondary & Higher Secondary School, Daman</p>
+            <span class="edu-date">Passed 2020</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills" class="section skills">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Skills</span>
+        <h2 class="section-title">Technical <span class="gradient-text">Stack</span></h2>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-category card">
+          <h3>Programming Languages</h3>
+          <div class="skill-items">
+            <span class="skill-tag">Java</span>
+            <span class="skill-tag">Python</span>
+          </div>
+        </div>
+        <div class="skill-category card">
+          <h3>Web Technologies</h3>
+          <div class="skill-items">
+            <span class="skill-tag">HTML</span>
+            <span class="skill-tag">CSS</span>
+            <span class="skill-tag">JavaScript</span>
+          </div>
+        </div>
+        <div class="skill-category card">
+          <h3>Database</h3>
+          <div class="skill-items">
+            <span class="skill-tag">MySQL</span>
+            <span class="skill-tag">Neon PostgreSQL</span>
+          </div>
+        </div>
+        <div class="skill-category card">
+          <h3>Tools & Platforms</h3>
+          <div class="skill-items">
+            <span class="skill-tag">GitHub</span>
+            <span class="skill-tag">VS Code</span>
+            <span class="skill-tag">Android Studio</span>
+            <span class="skill-tag">Antygravity</span>
+            <span class="skill-tag">Opencode</span>
+          </div>
+        </div>
+        <div class="skill-category card">
+          <h3>AI & Development</h3>
+          <div class="skill-items">
+            <span class="skill-tag">Prompt Engineering</span>
+            <span class="skill-tag">AI-Assisted Development</span>
+          </div>
+        </div>
+        <div class="skill-category card">
+          <h3>Core Concepts</h3>
+          <div class="skill-items">
+            <span class="skill-tag">Cybersecurity</span>
+            <span class="skill-tag">OOP</span>
+            <span class="skill-tag">DBMS</span>
+          </div>
+        </div>
+        <div class="skill-category card">
+          <h3>Deployment / Hosting</h3>
+          <div class="skill-items">
+            <span class="skill-tag">Vercel</span>
+            <span class="skill-tag">Render</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="section contact">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Contact</span>
+        <h2 class="section-title">Get In <span class="gradient-text">Touch</span></h2>
+      </div>
+      <!-- Contact Form -->
+      <div class="contact-form-wrap card">
+        <form id="contactForm" class="contact-form" action="https://formspree.io/f/xaqgjbkr" method="POST">
+          <div class="cf-row">
+            <div class="cf-field">
+              <label for="cfName">Name</label>
+              <input type="text" id="cfName" name="name" required placeholder="Your name" maxlength="100" pattern="[A-Za-zÀ-ÿ\s\-']+" title="Letters and spaces only">
+            </div>
+            <div class="cf-field">
+              <label for="cfEmail">Email</label>
+              <input type="email" id="cfEmail" name="email" required placeholder="your@email.com" maxlength="254">
+            </div>
+          </div>
+          <div class="cf-field">
+            <label for="cfSubject">Subject</label>
+            <input type="text" id="cfSubject" name="subject" required placeholder="What's this about?" maxlength="200">
+          </div>
+          <div class="cf-field">
+            <label for="cfMessage">Message</label>
+            <textarea id="cfMessage" name="message" rows="5" required placeholder="Write your message here..." maxlength="5000"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary cf-submit">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+            Send Message
+          </button>
+          <div id="cfSuccess" class="cf-success">Message sent! I'll get back to you soon.</div>
+          <div id="cfError" class="cf-error">Something went wrong. Please try again or email me directly.</div>
+        </form>
+      </div>
+
+      <div class="contact-grid">
+        <a href="tel:+918141652007" class="contact-card card">
+          <div class="contact-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <h3>Phone</h3>
+          <p>+91-8141652007</p>
+        </a>
+        <a href="mailto:darshyadav078@gmail.com" class="contact-card card">
+          <div class="contact-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <h3>Email</h3>
+          <p>darshyadav078@gmail.com</p>
+        </a>
+        <a href="https://github.com/Darsh01k" target="_blank" rel="noopener noreferrer" class="contact-card card">
+          <div class="contact-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          </div>
+          <h3>GitHub</h3>
+          <p>github.com/Darsh01k</p>
+        </a>
+        <a href="https://www.linkedin.com/in/darsh-yadav-31995331a" target="_blank" rel="noopener noreferrer" class="contact-card card">
+          <div class="contact-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </div>
+          <h3>LinkedIn</h3>
+          <p>darsh-yadav</p>
+        </a>
+        <a href="https://clipcheck-ai.vercel.app/" target="_blank" rel="noopener noreferrer" class="contact-card card">
+          <div class="contact-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </div>
+          <h3>ClipCheck</h3>
+          <p>Live Project</p>
+        </a>
+        <a href="https://mediflow-care.vercel.app/" target="_blank" rel="noopener noreferrer" class="contact-card card">
+          <div class="contact-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </div>
+          <h3>MediFlow</h3>
+          <p>Live Project</p>
+        </a>
+        <a href="#" class="contact-card card" data-action="openResumeViewer">
+          <div class="contact-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          </div>
+          <h3>Resume</h3>
+          <p>View / Download PDF</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2024 Darsh Yadav. Built with passion.</p>
+      <div class="footer-links">
+        <a href="https://github.com/Darsh01k" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://www.linkedin.com/in/darsh-yadav-31995331a" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="mailto:darshyadav078@gmail.com">Email</a>
+      </div>
+    </div>
+  </footer>
+
+  </div> <!-- end site-content -->
+
+  <!-- Project Overlay -->
+  <div id="projectOverlay" class="full-overlay">
+    <div class="overlay-backdrop"></div>
+    <div class="overlay-scroll-wrap">
+      <button class="overlay-close-btn">&times;</button>
+      <div class="overlay-header-box">
+        <div class="overlay-badge" id="overlayBadge">Project</div>
+        <h2 class="overlay-heading" id="overlayHeading"></h2>
+        <p class="overlay-sub" id="overlaySub"></p>
+        <div class="overlay-tech" id="overlayTech"></div>
+        <div class="overlay-img-wrap" id="overlayImgWrap"></div>
+      </div>
+      <div class="diagram-wrap" id="diagramWrap"></div>
+      <div class="overlay-body-box" id="overlayBody"></div>
+      <div class="overlay-links" id="overlayLinks"></div>
+    </div>
+  </div>
+
+  <!-- Resume Drawer (slide-in) -->
+  <div class="resume-drawer-backdrop" id="resumeDrawerBackdrop"></div>
+  <div class="resume-drawer" id="resumeDrawer">
+    <div class="resume-drawer-inner">
+      <div class="resume-drawer-header">
+        <h2>Resume</h2>
+        <button class="resume-drawer-close" id="resumeDrawerClose">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          Close
+        </button>
+      </div>
+      <div class="resume-embed-wrap">
+        <embed id="resumeEmbedDrawer" src="" type="application/pdf">
+      </div>
+    </div>
+  </div>
+
+  <!-- Back to Top -->
+  <button id="backToTop" class="back-to-top" aria-label="Back to top">
+    <svg class="bt-progress" viewBox="0 0 54 54">
+      <circle cx="27" cy="27" r="25" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="157.08" stroke-dashoffset="157.08" stroke-linecap="round"/>
+    </svg>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
+  <!-- Scripts -->
+  <script src="js/particles.js"></script>
+  <script src="js/script.js"></script>
+
+</body>
+</html>
