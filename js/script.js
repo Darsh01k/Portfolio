@@ -138,13 +138,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       });
 
-      gsap.utils.toArray('.stat-number').forEach(el => {
-        ScrollTrigger.create({
-          trigger: el, start: 'top 90%',
-          onEnter: () => animateCounter(el)
-        });
-      });
-
       ScrollTrigger.refresh();
       window.addEventListener('load', () => ScrollTrigger.refresh());
     } catch (e) {
@@ -161,29 +154,6 @@ document.addEventListener('DOMContentLoaded', () => {
       entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('reveal', 'visible'); obs.unobserve(entry.target); } });
     }, { threshold: 0.1 });
     revealEls.forEach(el => { el.classList.add('reveal'); obs.observe(el); });
-  }
-
-  // ─── COUNTER ANIMATION ───
-  function animateCounter(el) {
-    const target = parseInt(el.dataset.target);
-    const duration = 2000;
-    const start = performance.now();
-    function update(now) {
-      const progress = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      el.textContent = Math.floor(eased * target) + '+';
-      if (progress < 1) requestAnimationFrame(update);
-    }
-    requestAnimationFrame(update);
-  }
-
-  if (typeof gsap === 'undefined') {
-    document.querySelectorAll('.stat-number').forEach(el => {
-      const obs = new IntersectionObserver((entries) => {
-        entries.forEach(e => { if (e.isIntersecting) { animateCounter(e.target); obs.unobserve(e.target); } });
-      }, { threshold: 0.5 });
-      obs.observe(el);
-    });
   }
 
   // ─── PROJECT CARD CLICKS ───

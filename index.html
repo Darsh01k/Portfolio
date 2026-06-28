@@ -80,26 +80,11 @@
 
   <!-- Hero -->
   <section id="hero" class="hero">
-    <div class="hero-blur"></div>
-    <div class="hero-3d" aria-hidden="true">
-      <div class="orbit-tilt tilt-1"><div class="orbit-spin spin-1"><div class="orbit-ring" style="--s:650px"></div>
-        <div class="orb-obj" style="--a:0deg;--r:325px"><div class="lang-icon"><svg viewBox="0 0 44 44"><rect width="44" height="44" rx="10" fill="#f7df1e"/><text x="22" y="29" text-anchor="middle" fill="#000" font-family="Arial,sans-serif" font-size="20" font-weight="900">JS</text></svg></div></div>
-        <div class="orb-obj" style="--a:120deg;--r:325px"><div class="lang-icon"><svg viewBox="0 0 44 44"><rect width="44" height="44" rx="10" fill="#3178c6"/><text x="22" y="29" text-anchor="middle" fill="#fff" font-family="Arial,sans-serif" font-size="18" font-weight="800">TS</text></svg></div></div>
-        <div class="orb-obj" style="--a:240deg;--r:325px"><div class="lang-icon"><svg viewBox="0 0 44 44"><rect width="44" height="44" rx="10" fill="#3776ab"/><text x="22" y="29" text-anchor="middle" fill="#ffd43b" font-family="Arial,sans-serif" font-size="16" font-weight="800">Py</text></svg></div></div>
-      </div></div>
-      <div class="orbit-tilt tilt-2"><div class="orbit-spin spin-2"><div class="orbit-ring" style="--s:850px"></div>
-        <div class="orb-obj" style="--a:0deg;--r:425px"><div class="lang-icon"><svg viewBox="0 0 44 44"><rect width="44" height="44" rx="10" fill="#007396"/><text x="22" y="29" text-anchor="middle" fill="#fff" font-family="Arial,sans-serif" font-size="14" font-weight="700">Java</text></svg></div></div>
-        <div class="orb-obj" style="--a:120deg;--r:425px"><div class="lang-icon"><svg viewBox="0 0 44 44"><circle cx="22" cy="22" r="4" fill="#61dafb"/><ellipse cx="22" cy="22" rx="17" ry="6" fill="none" stroke="#61dafb" stroke-width="1.8"/><ellipse cx="22" cy="22" rx="17" ry="6" fill="none" stroke="#61dafb" stroke-width="1.8" transform="rotate(60 22 22)"/><ellipse cx="22" cy="22" rx="17" ry="6" fill="none" stroke="#61dafb" stroke-width="1.8" transform="rotate(120 22 22)"/></svg></div></div>
-        <div class="orb-obj" style="--a:240deg;--r:425px"><div class="lang-icon"><svg viewBox="0 0 44 44"><polygon points="22,3 39,12.5 39,31.5 22,41 5,31.5 5,12.5" fill="none" stroke="#339933" stroke-width="2.5"/><text x="22" y="28" text-anchor="middle" fill="#339933" font-family="Arial,sans-serif" font-size="18" font-weight="800">N</text></svg></div></div>
-      </div></div>
-      <div class="orbit-tilt tilt-3"><div class="orbit-spin spin-3"><div class="orbit-ring" style="--s:1050px"></div>
-        <div class="orb-obj" style="--a:0deg;--r:525px"><div class="lang-icon"><svg viewBox="0 0 44 44"><rect width="44" height="44" rx="10" fill="#e34f26"/><text x="22" y="29" text-anchor="middle" fill="#fff" font-family="Arial,sans-serif" font-size="13" font-weight="800">HTML</text></svg></div></div>
-        <div class="orb-obj" style="--a:90deg;--r:525px"><div class="lang-icon"><svg viewBox="0 0 44 44"><rect width="44" height="44" rx="10" fill="#1572b6"/><text x="22" y="29" text-anchor="middle" fill="#fff" font-family="Arial,sans-serif" font-size="14" font-weight="800">CSS</text></svg></div></div>
-        <div class="orb-obj" style="--a:180deg;--r:525px"><div class="lang-icon"><svg viewBox="0 0 44 44"><rect width="44" height="44" rx="10" fill="#f05032"/><path d="M15 11v20M15 15c-2.5 0-4 1.5-4 4s1.5 4 4 4M22 15c2.5 0 4 1.5 4 4s-1.5 4-4 4" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/><circle cx="15" cy="11" r="2.5" fill="#fff"/><circle cx="15" cy="31" r="2.5" fill="#fff"/><circle cx="22" cy="23" r="2.5" fill="#fff"/></svg></div></div>
-        <div class="orb-obj" style="--a:270deg;--r:525px"><div class="lang-icon"><svg viewBox="0 0 44 44"><rect width="44" height="44" rx="10" fill="#2496ed"/><path d="M12 16h3v-3h-3v3zm5-4h3v-3h-3v3zm0 4h3v-3h-3v3zm5-5h3v-3h-3v3zm0 4h3v-3h-3v3zm5-2h3v-3h-3v3z" fill="#fff"/><path d="M10 27c0 3 2.5 5 5.5 5h5c4 0 7-2.5 7-6 0-4-2.5-6-6-6h-1c-.5-2-2-4-4.5-4" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg></div></div>
-      </div></div>
-    </div>
+    <div class="hero-grid" aria-hidden="true"></div>
     <div class="hero-content">
+      <div class="hero-avatar">
+        <img src="assets/images/profile.jpg" alt="Darsh Yadav">
+      </div>
       <div class="hero-eyebrow">Darsh Yadav</div>
       <h1 class="hero-title">
         Building with <span class="gradient-text">Intelligence</span>
@@ -108,29 +93,19 @@
         <span id="typewriter"></span><span class="cursor-blink"></span>
       </div>
       <p class="hero-desc">
-        Computer Science Engineer &mdash; from fact-checking platforms to healthcare ecosystems. I craft full-stack and AI-powered applications that solve real problems.
+        Computer Science Engineer building full-stack &amp; AI-powered applications that solve real problems.
       </p>
       <div class="hero-actions">
-        <a href="#projects" class="btn btn-primary">View Projects</a>
+        <a href="#projects" class="btn btn-primary btn-glow">View Projects</a>
         <a href="#" class="btn btn-warm" data-action="openResumeViewer">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           Resume
         </a>
+        <a href="assets/resume/final%20Resume.pdf" download class="btn btn-secondary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download
+        </a>
         <a href="#contact" class="btn btn-secondary">Get in Touch</a>
-      </div>
-      <div class="hero-stats">
-        <div class="stat">
-          <span class="stat-number" data-target="2">0</span>
-          <span class="stat-label">Live Projects</span>
-        </div>
-        <div class="stat">
-          <span class="stat-number" data-target="5">0</span>
-          <span class="stat-label">AI Tools Used</span>
-        </div>
-        <div class="stat">
-          <span class="stat-number" data-target="2">0</span>
-          <span class="stat-label">Deploy Targets</span>
-        </div>
       </div>
     </div>
     <div class="scroll-indicator">
