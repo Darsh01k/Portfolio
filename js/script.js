@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const loader = document.getElementById('loader');
 
-  function startSite() {
+  const siteContent = document.getElementById('site-content');
+  if (siteContent) siteContent.style.opacity = '1';
 
   // ─── THEME TOGGLE ───
   const html = document.documentElement;
@@ -19,262 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ─── ROCKET CURSOR + RAF LOOP ───
-  const rocket = document.getElementById('cursorRocket');
-  let mx = 0, my = 0;
-  let pRx = 0, pRy = 0;
-  let rocketAngle = -90;
-  let targetAngle = -90;
-  const ANGLE_OFFSET = 45;
-
-  // Cursor lock for rocket landing animation
-  let cursorLocked = false;
-  let lockX = 0, lockY = 0;
-  let lockStartX = 0, lockStartY = 0;
-  let lockStartTime = 0;
-  let lockDuration = 400;
-  let lockCallback = null;
-
-  document.addEventListener('mousemove', (e) => {
-    mx = e.clientX;
-    my = e.clientY;
-  });
-
-  // Consolidated RAF loop: rocket position, blob parallax (NO DOM spawns)
-  const blobs = document.querySelectorAll('.mesh-blob');
-  let spawnInterval = null;
-
-  function animateCursor() {
-    if (!rocket) return;
-
-    if (cursorLocked) {
-      const elapsed = performance.now() - lockStartTime;
-      const t = Math.min(elapsed / lockDuration, 1);
-      const ease = 1 - Math.pow(1 - t, 3);
-      const cx = lockStartX + (lockX - lockStartX) * ease;
-      const cy = lockStartY + (lockY - lockStartY) * ease;
-      const scale = 1 - ease * 0.35;
-      rocket.style.transform = `translate(${cx - 16}px,${cy - 16}px) rotate(180deg) scale(${scale})`;
-      if (t >= 1 && lockCallback) {
-        for (let i = 0; i < 30; i++) {
-          const s = document.createElement('div');
-          s.className = 'spark';
-          const a = Math.random() * Math.PI * 2;
-          const d = 15 + Math.random() * 50;
-          const sz = 3 + Math.random() * 6;
-          s.style.cssText = `left:${lockX}px;top:${lockY}px;width:${sz}px;height:${sz}px;background:${['#e8a838','#f59e0b','#f97316','#5266eb'][Math.floor(Math.random()*4)]};--sx:${Math.cos(a)*d}px;--sy:${Math.sin(a)*d}px`;
-          document.body.appendChild(s);
-          setTimeout(() => { if (s.parentNode) s.remove(); }, 800);
-        }
-        for (let i = 0; i < 20; i++) spawnCloud(lockX, lockY);
-        rocket.style.transform = `translate(${lockX - 16}px,${lockY - 16}px) rotate(180deg) scale(1)`;
-        lockCallback();
-        cursorLocked = false;
-        lockCallback = null;
-      }
-    } else {
-      const dx = mx - pRx;
-      const dy = my - pRy;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-
-      if (dist > 4) {
-        targetAngle = Math.atan2(dy, dx) * (180 / Math.PI);
-        let diff = targetAngle - rocketAngle;
-        if (diff > 180) diff -= 360;
-        if (diff < -180) diff += 360;
-        rocketAngle += diff * 0.15;
-        rocket.style.transform = `translate(${mx - 16}px,${my - 16}px) rotate(${rocketAngle + ANGLE_OFFSET}deg)`;
-      } else {
-        rocket.style.transform = `translate(${mx - 16}px,${my - 16}px) rotate(${rocketAngle + ANGLE_OFFSET}deg)`;
-      }
-      pRx = mx;
-      pRy = my;
-
-      if (blobs.length) {
-        const bx = (mx / window.innerWidth - 0.5) * 2;
-        const by = (my / window.innerHeight - 0.5) * 2;
-        blobs.forEach((blob, i) => {
-          blob.style.transform = `translate(${bx * (5 + i * 3)}px, ${by * (5 + i * 3)}px)`;
-        });
-      }
-    }
-    requestAnimationFrame(animateCursor);
-  }
-  animateCursor();
-
-  // Decoupled DOM spawn: every 60ms, not in RAF
-  function doSpawn() {
-    if (cursorLocked || !rocket) return;
-    spawnSparks(mx, my, rocketAngle, 6);
-    spawnCloud(mx, my);
-  }
-  spawnInterval = setInterval(doSpawn, 60);
-
-  function spawnSparks(x, y, angle, count) {
-    const rad = (angle + 180 + ANGLE_OFFSET) * (Math.PI / 180);
-    const colors = ['#e8a838', '#f59e0b', '#f97316', '#5266eb'];
-    for (let i = 0; i < count; i++) {
-      const s = document.createElement('div');
-      s.className = 'spark';
-      const scatter = rad + (Math.random() - 0.5) * 0.5;
-      const d = 8 + Math.random() * 30;
-      const sz = 2 + Math.random() * 5;
-      s.style.cssText = `left:${x}px;top:${y}px;width:${sz}px;height:${sz}px;background:${colors[Math.floor(Math.random()*colors.length)]};--sx:${Math.cos(scatter)*d}px;--sy:${Math.sin(scatter)*d}px`;
-      document.body.appendChild(s);
-      setTimeout(() => { if (s.parentNode) s.remove(); }, 700);
-    }
-  }
-
-  function spawnCloud(x, y) {
-    for (let i = 0; i < 8; i++) {
-      const c = document.createElement('div');
-      c.className = 'cloud-puff';
-      const sz = 8 + Math.random() * 18;
-      const driftX = (Math.random() - 0.5) * 24;
-      c.style.cssText = `left:${x+(Math.random()-0.5)*12}px;top:${y+(Math.random()-0.5)*12}px;width:${sz}px;height:${sz}px;--cdx:${driftX}px`;
-      document.body.appendChild(c);
-      setTimeout(() => { if (c.parentNode) c.remove(); }, 2500);
-    }
-  }
-
-  // Page Visibility: pause RAF + interval when tab hidden
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden && spawnInterval) {
-      clearInterval(spawnInterval);
-      spawnInterval = null;
-    } else if (!document.hidden && !spawnInterval) {
-      spawnInterval = setInterval(doSpawn, 80);
-    }
-  });
-
-  // ─── GENERAL ROCKET LANDING ───
-  function landRocketOnElement(el, callback) {
-    if (cursorLocked) return;
-    const rect = el.getBoundingClientRect();
-    lockX = rect.left + rect.width / 2;
-    lockY = rect.top + rect.height / 2;
-    lockStartX = mx;
-    lockStartY = my;
-    lockStartTime = performance.now();
-    cursorLocked = true;
-    lockCallback = callback;
-  }
-
-  // ─── PROJECT CARD ROCKET LANDING ───
-  document.querySelectorAll('.project-card').forEach(card => {
-    card.addEventListener('click', function(e) {
-      if (e.target.closest('.project-link')) return;
-      const name = this.dataset.project;
-      if (name) {
-        e.preventDefault();
-        landRocketOnElement(this, () => {
-          setTimeout(() => openProject(name), 150);
-        });
-      }
-    });
-  });
-
-  // ─── BUTTONS & INTERACTIVE ELEMENTS LANDING ───
-  function performAction(el) {
-    const dataAction = el.dataset.action;
-    if (dataAction && typeof window[dataAction] === 'function') {
-      window[dataAction]();
-      return;
-    }
-    const href = el.getAttribute('href');
-    if (href && href !== '#') {
-      if (href.startsWith('#')) {
-        const target = document.querySelector(href);
-        if (target) target.scrollIntoView({ behavior: 'smooth' });
-      } else {
-        window.open(href, el.target || '_self');
-      }
-    } else {
-      el.click();
-    }
-  }
-
-  document.querySelectorAll('.btn, .contact-card').forEach(el => {
-    if (el.closest('#contactForm')) return;
-    el.addEventListener('click', function(e) {
-      if (cursorLocked) return;
-      const hasAction = this.dataset.action || (this.getAttribute('href') && this.getAttribute('href') !== '#');
-      if (!hasAction) return;
-      e.preventDefault();
-      landRocketOnElement(this, () => performAction(this));
-    });
-  });
-
-  // ─── CONTACT FORM ───
-  const contactForm = document.getElementById('contactForm');
-  const cfSuccess = document.getElementById('cfSuccess');
-  const cfError = document.getElementById('cfError');
-  if (contactForm) {
-    const submitBtn = contactForm.querySelector('.cf-submit');
-    contactForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      if (cursorLocked) return;
-      if (cfError) cfError.classList.remove('visible');
-      const form = this;
-      landRocketOnElement(submitBtn, () => {
-        const data = new FormData(form);
-        fetch(form.action, {
-          method: 'POST',
-          body: data,
-          headers: { 'Accept': 'application/json' }
-        }).then(r => r.json()).then(res => {
-          if (res.ok) {
-            form.reset();
-            if (cfSuccess) cfSuccess.classList.add('visible');
-          } else {
-            if (cfError) cfError.classList.add('visible');
-          }
-        }).catch(() => {
-          if (cfError) cfError.classList.add('visible');
-        });
-      });
-    });
-  }
-
-  document.querySelectorAll('.nav-link').forEach(el => {
-    el.addEventListener('click', function(e) {
-      if (cursorLocked) return;
-      const href = this.getAttribute('href');
-      if (!href || href === '#') return;
-      e.preventDefault();
-      landRocketOnElement(this, () => {
-        if (href.startsWith('#')) {
-          const target = document.querySelector(href);
-          if (target) target.scrollIntoView({ behavior: 'smooth' });
-        }
-      });
-    });
-  });
-
-  // ─── PARTICLE BURST ON CLICK ───
-  document.addEventListener('click', (e) => {
-    const colors = ['#5266eb', '#6b7df5', '#8b5cf6', '#e8a838'];
-    for (let i = 0; i < 12; i++) {
-      const p = document.createElement('div');
-      p.className = 'burst-particle';
-      const size = 2 + Math.random() * 4;
-      const angle = (Math.PI * 2 / 12) * i;
-      const dist = 20 + Math.random() * 40;
-      p.style.cssText = `
-        position: fixed; left: ${e.clientX}px; top: ${e.clientY}px;
-        width: ${size}px; height: ${size}px;
-        background: ${colors[Math.floor(Math.random() * colors.length)]};
-        --bx: ${Math.cos(angle) * dist}px;
-        --by: ${Math.sin(angle) * dist}px;
-        pointer-events: none; z-index: 99999;
-        border-radius: 50%;
-        animation: burstFade 0.8s ease-out forwards;
-      `;
-      document.body.appendChild(p);
-      setTimeout(() => p.remove(), 800);
-    }
-  });
-
   // ─── TYPEWRITER ───
   const typewriterEl = document.getElementById('typewriter');
   if (typewriterEl) {
@@ -284,10 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
       'AI Application Builder',
       'Problem Solver'
     ];
-    let phraseIdx = 0;
-    let charIdx = 0;
-    let isDeleting = false;
-    let isWaiting = false;
+    let phraseIdx = 0, charIdx = 0, isDeleting = false, isWaiting = false;
 
     function typeStep() {
       const current = phrases[phraseIdx];
@@ -296,11 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
         typewriterEl.textContent = current.slice(0, charIdx);
         if (charIdx === current.length) {
           isWaiting = true;
-          setTimeout(() => {
-            isWaiting = false;
-            isDeleting = true;
-            typeStep();
-          }, 2000);
+          setTimeout(() => { isWaiting = false; isDeleting = true; typeStep(); }, 2000);
           return;
         }
         setTimeout(typeStep, 60 + Math.random() * 60);
@@ -319,47 +56,31 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(typeStep, 1500);
   }
 
-  // ─── MAGNETIC BUTTONS ───
-  const magneticBtns = document.querySelectorAll('.btn');
-  magneticBtns.forEach(btn => {
-    let magnetThrottle = 0;
-    btn.addEventListener('mousemove', (e) => {
-      const now = Date.now();
-      if (now - magnetThrottle < 30) return;
-      magnetThrottle = now;
-      const rect = btn.getBoundingClientRect();
-      const x = e.clientX - rect.left - rect.width / 2;
-      const y = e.clientY - rect.top - rect.height / 2;
-      const dist = Math.sqrt(x * x + y * y);
-      if (dist < 100) {
-        const strength = 0.3;
-        btn.style.transform = `translate(${x * strength}px, ${y * strength}px)`;
-      }
-    });
-    btn.addEventListener('mouseleave', () => {
-      btn.style.transform = '';
-    });
-  });
+  // ─── NAVBAR SCROLL ───
+  const navbar = document.getElementById('navbar');
+  let scrollThrottle = 0;
+  window.addEventListener('scroll', () => {
+    const now = Date.now();
+    if (now - scrollThrottle < 100) return;
+    scrollThrottle = now;
+    navbar.classList.toggle('scrolled', window.scrollY > 50);
+  }, { passive: true });
 
-  // ─── 3D TILT CARDS ───
-  const tiltCards = document.querySelectorAll('.project-card, .contact-card, .edu-card');
-  tiltCards.forEach(card => {
-    let tiltThrottle = 0;
-    card.addEventListener('mousemove', (e) => {
-      const now = Date.now();
-      if (now - tiltThrottle < 30) return;
-      tiltThrottle = now;
-      const rect = card.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width - 0.5;
-      const y = (e.clientY - rect.top) / rect.height - 0.5;
-      card.style.transform = `perspective(800px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg)`;
+  // ─── MOBILE MENU ───
+  const menuBtn = document.getElementById('menuBtn');
+  const navLinks = document.querySelector('.nav-links');
+  if (menuBtn && navLinks) {
+    menuBtn.addEventListener('click', () => {
+      menuBtn.classList.toggle('active');
+      navLinks.classList.toggle('open');
     });
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = 'perspective(800px) rotateY(0deg) rotateX(0deg)';
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        menuBtn.classList.remove('active');
+        navLinks.classList.remove('open');
+      });
     });
-  });
-
-  // ─── GRADIENT MESH BLOBS (handled in RAF loop above) ───
+  }
 
   // ─── SECTION PROGRESS INDICATOR ───
   const spDots = document.querySelectorAll('.sp-dot');
@@ -413,8 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       gsap.utils.toArray('.stat-number').forEach(el => {
         ScrollTrigger.create({
-          trigger: el,
-          start: 'top 85%',
+          trigger: el, start: 'top 85%',
           onEnter: () => animateCounter(el)
         });
       });
@@ -451,7 +171,6 @@ document.addEventListener('DOMContentLoaded', () => {
     requestAnimationFrame(update);
   }
 
-  // Fallback counter observer
   if (typeof gsap === 'undefined') {
     document.querySelectorAll('.stat-number').forEach(el => {
       const obs = new IntersectionObserver((entries) => {
@@ -461,26 +180,88 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ─── MOBILE MENU ───
-  const menuBtn = document.getElementById('menuBtn');
-  const navLinks = document.querySelector('.nav-links');
-  if (menuBtn && navLinks) {
-    menuBtn.addEventListener('click', () => {
-      menuBtn.classList.toggle('active');
-      navLinks.classList.toggle('open');
+  // ─── PROJECT CARD CLICKS ───
+  document.querySelectorAll('.project-card').forEach(card => {
+    card.addEventListener('click', function(e) {
+      if (e.target.closest('.project-link')) return;
+      const name = this.dataset.project;
+      if (name) {
+        e.preventDefault();
+        openProject(name);
+      }
     });
-    document.querySelectorAll('.nav-link').forEach(link => {
-      link.addEventListener('click', () => {
-        menuBtn.classList.remove('active');
-        navLinks.classList.remove('open');
+  });
+
+  // ─── BUTTONS & INTERACTIVE ELEMENTS ───
+  function performAction(el) {
+    const dataAction = el.dataset.action;
+    if (dataAction && typeof window[dataAction] === 'function') {
+      window[dataAction]();
+      return;
+    }
+    const href = el.getAttribute('href');
+    if (href && href !== '#') {
+      if (href.startsWith('#')) {
+        const target = document.querySelector(href);
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        window.open(href, el.target || '_self');
+      }
+    }
+  }
+
+  document.querySelectorAll('.btn, .contact-card').forEach(el => {
+    if (el.closest('#contactForm')) return;
+    el.addEventListener('click', function(e) {
+      const hasAction = this.dataset.action || (this.getAttribute('href') && this.getAttribute('href') !== '#');
+      if (!hasAction) return;
+      e.preventDefault();
+      performAction(this);
+    });
+  });
+
+  document.querySelectorAll('.nav-link').forEach(el => {
+    el.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (!href || href === '#') return;
+      e.preventDefault();
+      if (href.startsWith('#')) {
+        const target = document.querySelector(href);
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+
+  // ─── CONTACT FORM ───
+  const contactForm = document.getElementById('contactForm');
+  const cfSuccess = document.getElementById('cfSuccess');
+  const cfError = document.getElementById('cfError');
+  if (contactForm) {
+    contactForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      if (cfError) cfError.classList.remove('visible');
+      const data = new FormData(this);
+      fetch(this.action, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      }).then(r => r.json()).then(res => {
+        if (res.ok) {
+          this.reset();
+          if (cfSuccess) cfSuccess.classList.add('visible');
+        } else {
+          if (cfError) cfError.classList.add('visible');
+        }
+      }).catch(() => {
+        if (cfError) cfError.classList.add('visible');
       });
     });
   }
 
-  // ─── NAVBAR SCROLL ───
-  const navbar = document.getElementById('navbar');
-  window.addEventListener('scroll', () => {
-    navbar.classList.toggle('scrolled', window.scrollY > 50);
+  // ─── NAV RESUME ───
+  document.getElementById('navResume').addEventListener('click', (e) => {
+    e.preventDefault();
+    openResumeViewer();
   });
 
   // ====== DIAGRAM BUILDER ======
@@ -679,7 +460,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.style.overflow = 'hidden';
     const scrollWrap = overlay.querySelector('.overlay-scroll-wrap');
     if (scrollWrap) scrollWrap.scrollTop = 0;
-    // GSAP entrance animation
     if (typeof gsap !== 'undefined') {
       gsap.fromTo(overlay.querySelector('.overlay-scroll-wrap'),
         { opacity: 0, scale: 0.95, y: 20 },
@@ -693,11 +473,14 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.style.overflow = '';
   };
 
-  // Overlay close/backdrop listeners (replaces inline onclick for CSP)
-  overlay.querySelector('.overlay-close-btn').addEventListener('click', closeProjectOverlay);
-  overlay.querySelector('.overlay-backdrop').addEventListener('click', closeProjectOverlay);
+  if (overlay) {
+    const closeBtn = overlay.querySelector('.overlay-close-btn');
+    const backdrop = overlay.querySelector('.overlay-backdrop');
+    if (closeBtn) closeBtn.addEventListener('click', closeProjectOverlay);
+    if (backdrop) backdrop.addEventListener('click', closeProjectOverlay);
+  }
 
-  // ─── RESUME DRAWER (slide-in) ───
+  // ─── RESUME DRAWER ───
   const resumeDrawer = document.getElementById('resumeDrawer');
   const resumeBackdrop = document.getElementById('resumeDrawerBackdrop');
   const resumeEmbed = document.getElementById('resumeEmbedDrawer');
@@ -716,19 +499,19 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => { resumeEmbed.src = ''; }, 400);
   };
 
-  document.getElementById('navResume').addEventListener('click', (e) => {
-    e.preventDefault();
-    openResumeViewer();
-  });
   document.getElementById('resumeDrawerClose').addEventListener('click', closeResumeViewer);
-  resumeBackdrop.addEventListener('click', closeResumeViewer);
+  if (resumeBackdrop) resumeBackdrop.addEventListener('click', closeResumeViewer);
 
   // ─── BACK TO TOP ───
   const backToTop = document.getElementById('backToTop');
   const progressCircle = document.querySelector('.bt-progress circle');
   const circumference = 157.08;
 
+  let bttThrottle = 0;
   window.addEventListener('scroll', () => {
+    const now = Date.now();
+    if (now - bttThrottle < 100) return;
+    bttThrottle = now;
     const scrollY = window.scrollY;
     backToTop.classList.toggle('visible', scrollY > 600);
     if (progressCircle) {
@@ -736,7 +519,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const pct = h > 0 ? scrollY / h : 0;
       progressCircle.style.strokeDashoffset = circumference * (1 - pct);
     }
-  });
+  }, { passive: true });
 
   backToTop.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -748,89 +531,6 @@ document.addEventListener('DOMContentLoaded', () => {
       closeProjectOverlay();
       if (resumeDrawer.classList.contains('active')) closeResumeViewer();
     }
-  });
-
-  } // end startSite
-
-  // ─── LOADER ANIMATION ───
-  const siteContent = document.getElementById('site-content');
-  if (typeof gsap !== 'undefined' && loader) {
-    const tl = gsap.timeline({
-      onComplete: () => {
-        loader.classList.add('hidden');
-        startSite();
-      }
-    });
-
-    // 1. Fade in planet
-    tl.to('.loader-planet', { opacity: 1, duration: 0.6, ease: 'power2.out' }, 0);
-
-    // 2. Rocket shake + exhaust
-    tl.to('.loader-rocket-wrapper', { scale: 1.08, duration: 0.1, yoyo: true, repeat: 7, ease: 'power1.inOut' }, 0.2);
-    tl.to('.loader-exhaust', { opacity: 1, duration: 0.2 }, 0.2);
-
-    // 3. Exhaust fades just before launch
-    tl.to('.loader-exhaust', { opacity: 0, duration: 0.2 }, 1.1);
-
-    // 4. Rocket launches straight upward (no rotation)
-    tl.to('.loader-rocket-wrapper', {
-      y: -(window.innerHeight * 0.48),
-      duration: 1.3,
-      ease: 'power2.in',
-    }, 1.0);
-
-    // 5. Rocket lands on planet - scale down + burst
-    tl.to('.loader-rocket-wrapper', { scale: 0.4, duration: 0.25, ease: 'back.in(2)' }, 2.4);
-    tl.to('.loader-rocket img', { filter: 'drop-shadow(0 0 40px rgba(82,102,235,0.9))', duration: 0.25 }, 2.4);
-    tl.call(() => {
-      const px = window.innerWidth / 2;
-      const py = window.innerHeight * 0.18 + 32;
-      const colors = ['#5266eb', '#6b7df5', '#8b5cf6', '#e8a838'];
-      for (let i = 0; i < 24; i++) {
-        const p = document.createElement('div');
-        p.className = 'burst-particle';
-        const a = Math.random() * Math.PI * 2;
-        const d = 15 + Math.random() * 50;
-        const sz = 2 + Math.random() * 5;
-        p.style.cssText = `position:fixed;left:${px}px;top:${py}px;width:${sz}px;height:${sz}px;background:${colors[Math.floor(Math.random()*4)]};--bx:${Math.cos(a)*d}px;--by:${Math.sin(a)*d}px;pointer-events:none;z-index:100001;border-radius:50%;animation:burstFade 0.8s ease-out forwards;`;
-        document.body.appendChild(p);
-        setTimeout(() => p.remove(), 800);
-      }
-    }, null, null, 2.4);
-
-    // 6. Fade rocket out, keep planet
-    tl.to('.loader-rocket-wrapper', { opacity: 0, duration: 0.15 }, 2.4);
-
-    // 7. Flash overlay
-    tl.to(loader, { backgroundColor: '#ffffff', duration: 0.08 }, 2.5);
-    tl.to(loader, { backgroundColor: '', duration: 0.06 }, 2.58);
-
-    // 8. Planet zooms in to fill screen
-    tl.to('.loader-planet', {
-      scale: 18, opacity: 1, duration: 0.8, ease: 'power2.in',
-    }, 2.6);
-
-    // 9. Site content zooms out (camera pulls back from planet)
-    if (siteContent) {
-      gsap.set(siteContent, { scale: 1.6, opacity: 0 });
-      tl.to(siteContent, {
-        scale: 1, opacity: 1, duration: 0.7, ease: 'power3.out',
-        onComplete: () => { siteContent.style.transform = 'none'; }
-      }, 2.7);
-    }
-
-    // 10. Fade loader text
-    tl.to('.loader-text', { opacity: 0, duration: 0.2 }, 2.5);
-
-    // 11. Planet fades out as site takes over
-    tl.to('.loader-planet', { opacity: 0, duration: 0.35 }, 3.2);
-
-    // 12. Hide loader
-    tl.to(loader, { opacity: 0, duration: 0.3 }, 3.4);
-  } else {
-    if (loader) loader.remove();
-    if (siteContent) siteContent.style.opacity = '1';
-    startSite();
-  }
+  }, { passive: true });
 
 });

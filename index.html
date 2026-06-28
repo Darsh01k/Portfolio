@@ -20,34 +20,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>DY</text></svg>">
-  <!-- Three.js -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r170/three.min.js"></script>
   <!-- GSAP -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 </head>
 <body>
 
-  <!-- Loading Splash -->
-  <div id="loader">
-    <div class="loader-planet" id="loaderPlanet">
-      <div class="planet-body"></div>
-      <div class="planet-ring"></div>
-      <div class="planet-glow"></div>
-    </div>
-    <div class="loader-rocket-wrapper" id="loaderRocketWrapper">
-      <div class="loader-rocket" id="loaderRocket">
-        <img src="assets/images/cursor-icon.png" alt="Rocket">
-      </div>
-      <div class="loader-exhaust" id="loaderExhaust">
-        <div class="loader-flame loader-flame-1"></div>
-        <div class="loader-flame loader-flame-2"></div>
-        <div class="loader-flame loader-flame-3"></div>
-        <div class="loader-smoke"></div>
-      </div>
-    </div>
-    <div class="loader-text">Initializing...</div>
-  </div>
   <!-- Section Progress Indicator -->
   <div id="sectionProgress" class="section-progress">
     <div class="sp-track">
@@ -61,14 +39,6 @@
       <div class="sp-dot" data-section="skills"><span class="sp-label">Skills</span></div>
       <div class="sp-dot" data-section="contact"><span class="sp-label">Contact</span></div>
     </div>
-  </div>
-
-  <!-- Particle Canvas Background -->
-  <div id="particle-canvas"></div>
-
-  <!-- Custom Cursor -->
-  <div id="cursorRocket">
-    <img src="assets/images/cursor-icon.png" width="32" height="32" alt="Cursor">
   </div>
 
   <!-- Navbar -->
@@ -108,24 +78,16 @@
 
   <!-- Hero -->
   <section id="hero" class="hero">
-    <div class="hero-bg">
-      <div class="gradient-mesh">
-        <div class="mesh-blob mesh-blob-1"></div>
-        <div class="mesh-blob mesh-blob-2"></div>
-        <div class="mesh-blob mesh-blob-3"></div>
-      </div>
-      <div class="grid-overlay"></div>
-    </div>
     <div class="hero-content">
-      <div class="hero-eyebrow">Introducing</div>
+      <div class="hero-eyebrow">Darsh Yadav</div>
       <h1 class="hero-title">
-        Darsh <span class="gradient-text">Yadav</span>
+        Building with <span class="gradient-text">Intelligence</span>
       </h1>
       <div class="hero-typewriter">
         <span id="typewriter"></span><span class="cursor-blink"></span>
       </div>
       <p class="hero-desc">
-        Building intelligent systems at the intersection of web development and AI &mdash; from fact-checking platforms to healthcare ecosystems.
+        Computer Science Engineer &mdash; from fact-checking platforms to healthcare ecosystems. I craft full-stack and AI-powered applications that solve real problems.
       </p>
       <div class="hero-actions">
         <a href="#projects" class="btn btn-primary">View Projects</a>
@@ -206,8 +168,6 @@
       </div>
     </div>
   </section>
-
-
 
   <!-- Projects -->
   <section id="projects" class="section projects">
@@ -381,7 +341,6 @@
         <span class="section-eyebrow">Contact</span>
         <h2 class="section-title">Get In <span class="gradient-text">Touch</span></h2>
       </div>
-      <!-- Contact Form -->
       <div class="contact-form-wrap card">
         <form id="contactForm" class="contact-form" action="https://formspree.io/f/xaqgjbkr" method="POST">
           <div class="cf-row">
@@ -497,7 +456,7 @@
     </div>
   </div>
 
-  <!-- Resume Drawer (slide-in) -->
+  <!-- Resume Drawer -->
   <div class="resume-drawer-backdrop" id="resumeDrawerBackdrop"></div>
   <div class="resume-drawer" id="resumeDrawer">
     <div class="resume-drawer-inner">
@@ -523,8 +482,6 @@
   </button>
 
   <!-- Scripts -->
-  <script src="js/particles.js"></script>
   <script src="js/script.js"></script>
-
 </body>
 </html>
