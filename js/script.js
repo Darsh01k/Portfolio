@@ -83,9 +83,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ─── NAVBAR ACTIVE SECTION ───
-  const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
+  const sectionNavLinks = document.querySelectorAll('.nav-link[href^="#"]');
   const sections = document.querySelectorAll('section[id]');
-  if (navLinks.length && sections.length) {
+  if (sectionNavLinks.length && sections.length) {
     const sectionObs = new IntersectionObserver((entries) => {
       let maxVisible = 0;
       let activeId = '';
@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
       if (activeId) {
-        navLinks.forEach(link => {
+        sectionNavLinks.forEach(link => {
           link.classList.toggle('active', link.getAttribute('href') === '#' + activeId);
         });
       }
