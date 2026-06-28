@@ -487,11 +487,11 @@ section[id] { perspective: 1000px; }
   transform: translateY(-50%);
   z-index: 999;
   display: flex; align-items: center; gap: 10px;
-  pointer-events: none;
 }
 .sp-track {
   width: 2px; height: 200px;
-  background: var(--color-border);
+  background: var(--color-text-muted);
+  opacity: 0.15;
   border-radius: 1px;
   position: relative;
   overflow: hidden;
@@ -508,19 +508,20 @@ section[id] { perspective: 1000px; }
   align-items: flex-start;
 }
 .sp-dot {
-  width: 8px; height: 8px;
+  width: 10px; height: 10px;
   border-radius: 50%;
-  background: var(--color-border);
+  background: var(--color-text-muted);
+  opacity: 0.25;
   border: 2px solid transparent;
   transition: all 0.3s ease;
   position: relative;
-  pointer-events: auto;
   cursor: pointer;
 }
 .sp-dot.active {
   background: var(--color-accent);
-  border-color: var(--color-accent-ghost);
-  box-shadow: 0 0 12px rgba(148,163,184,0.2);
+  border-color: var(--color-accent);
+  opacity: 1;
+  box-shadow: 0 0 12px var(--color-glow);
 }
 .sp-label {
   position: absolute; right: 18px; top: 50%;
