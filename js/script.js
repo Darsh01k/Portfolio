@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const stored = localStorage.getItem('theme');
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
   html.setAttribute('data-theme', stored || (prefersDark ? 'dark' : 'light'));
-  html.dispatchEvent(new CustomEvent('themechange'));
 
   if (themeToggle) {
     themeToggle.addEventListener('click', () => {
@@ -17,7 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const next = current === 'dark' ? 'light' : 'dark';
       html.setAttribute('data-theme', next);
       localStorage.setItem('theme', next);
-      html.dispatchEvent(new CustomEvent('themechange'));
     });
   }
 
