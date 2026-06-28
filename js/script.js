@@ -86,22 +86,22 @@ document.addEventListener('DOMContentLoaded', () => {
   const sectionNavLinks = document.querySelectorAll('.nav-link[href^="#"]');
   const sections = document.querySelectorAll('section[id]');
   if (sectionNavLinks.length && sections.length) {
-    const sectionObs = new IntersectionObserver((entries) => {
-      let maxVisible = 0;
+    function updateActiveSection() {
+      const scrollY = window.scrollY + 120;
       let activeId = '';
-      entries.forEach(entry => {
-        if (entry.intersectionRatio > maxVisible) {
-          maxVisible = entry.intersectionRatio;
-          activeId = entry.target.id;
-        }
+      sections.forEach(s => {
+        const top = s.offsetTop;
+        const bottom = top + s.offsetHeight;
+        if (scrollY >= top && scrollY < bottom) activeId = s.id;
       });
       if (activeId) {
         sectionNavLinks.forEach(link => {
           link.classList.toggle('active', link.getAttribute('href') === '#' + activeId);
         });
       }
-    }, { threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1] });
-    sections.forEach(s => sectionObs.observe(s));
+    }
+    window.addEventListener('scroll', updateActiveSection, { passive: true });
+    updateActiveSection();
   }
 
   // ─── GSAP SCROLL REVEALS ───
