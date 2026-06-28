@@ -470,6 +470,9 @@ section[id] { perspective: 1000px; }
 .contact-card h3 { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
 .contact-card p { color: var(--color-text-muted); font-size: 13px; word-break: break-all; }
 
+/* ── Background Mesh ── */
+#bgMesh { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
+
 /* ── Resume Section ── */
 .resume-section-content { display: flex; flex-direction: column; align-items: center; gap: 24px; }
 .resume-section-embed { width: 100%; max-width: 800px; height: 80vh; border-radius: var(--radius-lg); overflow: hidden; background: white; }
