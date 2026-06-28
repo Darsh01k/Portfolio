@@ -637,13 +637,73 @@ section[id] { perspective: 1000px; }
 ::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--color-text-muted); }
 
-/* ── 3D Hero Rings ── */
-.hero-3d { position: absolute; inset: 0; overflow: hidden; perspective: 1200px; display: flex; align-items: center; justify-content: center; pointer-events: none; z-index: 0; }
-.h-ring { position: absolute; border-radius: 50%; border: 2px solid; background: transparent; will-change: transform; }
-.h-ring-1 { width: 400px; height: 400px; border-color: rgba(20,184,166,0.35); box-shadow: 0 0 40px rgba(20,184,166,0.1); animation: orbit1 12s linear infinite; }
-.h-ring-2 { width: 550px; height: 550px; border-color: rgba(6,182,212,0.25); box-shadow: 0 0 50px rgba(6,182,212,0.08); animation: orbit2 16s linear infinite; }
-.h-ring-3 { width: 700px; height: 700px; border-color: rgba(232,168,56,0.12); box-shadow: 0 0 60px rgba(232,168,56,0.05); animation: orbit3 20s linear infinite; }
-@keyframes orbit1 { 0% { transform: rotateX(75deg) rotateZ(0deg); } 100% { transform: rotateX(75deg) rotateZ(360deg); } }
-@keyframes orbit2 { 0% { transform: rotateX(65deg) rotateZ(0deg); } 100% { transform: rotateX(65deg) rotateZ(360deg); } }
-@keyframes orbit3 { 0% { transform: rotateX(55deg) rotateZ(0deg); } 100% { transform: rotateX(55deg) rotateZ(360deg); } }
-@media (prefers-reduced-motion: reduce) { .h-ring { animation: none !important; } }
+/* ── 3D Hero Orbital System ── */
+.hero-3d {
+  position: absolute; inset: 0; overflow: hidden;
+  perspective: 1500px;
+  display: flex; align-items: center; justify-content: center;
+  pointer-events: none; z-index: 0;
+}
+
+.orbit-tilt {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  transform-style: preserve-3d;
+}
+.tilt-1 { transform: rotateX(75deg); }
+.tilt-2 { transform: rotateX(65deg); }
+.tilt-3 { transform: rotateX(55deg); }
+
+.orbit-spin {
+  position: absolute;
+  width: 0; height: 0;
+  display: flex; align-items: center; justify-content: center;
+  transform-style: preserve-3d;
+}
+.spin-1 { animation: sp1 15s linear infinite; }
+.spin-2 { animation: sp2 22s linear infinite; animation-direction: reverse; }
+.spin-3 { animation: sp3 28s linear infinite; }
+@keyframes sp1 { 0% { transform: rotateZ(0deg); } 100% { transform: rotateZ(360deg); } }
+@keyframes sp2 { 0% { transform: rotateZ(0deg); } 100% { transform: rotateZ(-360deg); } }
+@keyframes sp3 { 0% { transform: rotateZ(0deg); } 100% { transform: rotateZ(360deg); } }
+
+.orbit-ring {
+  position: absolute;
+  width: var(--s); height: var(--s);
+  border-radius: 50%; border: 2px solid; background: transparent;
+  top: calc(var(--s) / -2); left: calc(var(--s) / -2);
+}
+.spin-1 .orbit-ring { border-color: rgba(20,184,166,0.3); box-shadow: 0 0 50px rgba(20,184,166,0.08); }
+.spin-2 .orbit-ring { border-color: rgba(6,182,212,0.2); box-shadow: 0 0 60px rgba(6,182,212,0.06); }
+.spin-3 .orbit-ring { border-color: rgba(232,168,56,0.1); box-shadow: 0 0 70px rgba(232,168,56,0.04); }
+
+.orb-obj {
+  position: absolute; top: 0; left: 0;
+  width: 0; height: 0;
+  transform: rotateZ(var(--a)) translateX(var(--r));
+  transform-style: preserve-3d;
+}
+
+/* ── Cube ── */
+.cube3d { width: 24px; height: 24px; position: relative; transform: translate(-12px,-12px); transform-style: preserve-3d; animation: cs 6s linear infinite; }
+.cube3d .f,.cube3d .b,.cube3d .r,.cube3d .l,.cube3d .t,.cube3d .d { position: absolute; width: 24px; height: 24px; border: 1px solid rgba(20,184,166,0.5); background: rgba(20,184,166,0.08); }
+.cube3d .f { transform: translateZ(12px); }
+.cube3d .b { transform: rotateY(180deg) translateZ(12px); }
+.cube3d .r { transform: rotateY(90deg) translateZ(12px); }
+.cube3d .l { transform: rotateY(-90deg) translateZ(12px); }
+.cube3d .t { transform: rotateX(90deg) translateZ(12px); }
+.cube3d .d { transform: rotateX(-90deg) translateZ(12px); }
+@keyframes cs { 0% { transform: translate(-12px,-12px) rotateX(0deg) rotateY(0deg); } 100% { transform: translate(-12px,-12px) rotateX(360deg) rotateY(360deg); } }
+
+/* ── Sphere ── */
+.sphere3d { width: 20px; height: 20px; border-radius: 50%; transform: translate(-10px,-10px); background: radial-gradient(circle at 35% 35%, rgba(6,182,212,0.9), rgba(20,184,166,0.25)); box-shadow: 0 0 14px rgba(6,182,212,0.3); animation: sp 3s ease-in-out infinite; }
+@keyframes sp { 0%,100% { transform: translate(-10px,-10px) scale(1); } 50% { transform: translate(-10px,-10px) scale(1.2); } }
+
+/* ── Diamond ── */
+.diamond3d { width: 22px; height: 22px; position: relative; transform: translate(-11px,-11px); transform-style: preserve-3d; animation: dia 5s linear infinite; }
+.diamond3d .p1,.diamond3d .p2 { position: absolute; inset: 0; border: 1px solid rgba(232,168,56,0.45); clip-path: polygon(50% 0%,100% 50%,50% 100%,0% 50%); }
+.diamond3d .p1 { background: rgba(232,168,56,0.1); }
+.diamond3d .p2 { background: rgba(232,168,56,0.06); transform: rotateY(90deg); }
+@keyframes dia { 0% { transform: translate(-11px,-11px) rotateX(0deg) rotateZ(0deg); } 100% { transform: translate(-11px,-11px) rotateX(360deg) rotateZ(360deg); } }
+
+@media (prefers-reduced-motion: reduce) { .orbit-spin, .cube3d, .sphere3d, .diamond3d { animation: none !important; } }
