@@ -224,12 +224,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ─── NAV RESUME ───
-  document.getElementById('navResume').addEventListener('click', (e) => {
-    e.preventDefault();
-    openResumeViewer();
-  });
-
   // ====== DIAGRAM BUILDER ======
   function buildNode(icon, label, sublabel, accent) {
     return `<div class="diagram-node ${accent || ''}">
