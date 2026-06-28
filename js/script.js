@@ -19,6 +19,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // ─── NAV LOGO ───
+  document.querySelector('.nav-logo').addEventListener('click', (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    history.replaceState(null, '', location.pathname + location.search);
+  });
+
   // ─── TYPEWRITER ───
   const typewriterEl = document.getElementById('typewriter');
   if (typewriterEl) {
