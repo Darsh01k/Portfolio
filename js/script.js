@@ -121,26 +121,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
       gsap.utils.toArray('.section-header').forEach((header) => {
         const tl = gsap.timeline({
-          scrollTrigger: { trigger: header, start: 'top 80%', toggleActions: 'play none none none' }
+          scrollTrigger: { trigger: header, start: 'top 90%', toggleActions: 'play none none none' }
         });
-        tl.fromTo(header, { clipPath: 'inset(50% 0 50% 0)' }, { clipPath: 'inset(0 0 0 0)', duration: 0.6, ease: 'power3.out' });
-        tl.from(header.querySelector('.section-eyebrow'), { opacity: 0, y: 15, duration: 0.3 }, '-=0.35');
-        tl.from(header.querySelector('.section-title'), { opacity: 0, y: 15, duration: 0.3 }, '-=0.15');
+        tl.fromTo(header, { clipPath: 'inset(50% 0 50% 0)' }, { clipPath: 'inset(0 0 0 0)', duration: 0.5, ease: 'power3.out' });
+        tl.from(header.querySelector('.section-eyebrow'), { opacity: 0, y: 10, duration: 0.2 }, '-=0.3');
+        tl.from(header.querySelector('.section-title'), { opacity: 0, y: 10, duration: 0.2 }, '-=0.1');
       });
 
       gsap.utils.toArray('.about-card, .about-info, .project-card, .edu-card, .skill-category, .contact-card').forEach((el, i) => {
         gsap.from(el, {
-          scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' },
-          scale: 0.6, y: 60, opacity: 0, rotateX: 8,
+          scrollTrigger: { trigger: el, start: 'top 92%', toggleActions: 'play none none none' },
+          scale: 0.6, y: 50, opacity: 0, rotateX: 6,
           transformOrigin: 'center bottom',
-          duration: 0.55, delay: i * 0.06,
-          ease: 'back.out(1.4)', force3D: true
+          duration: 0.4, delay: i * 0.03,
+          ease: 'back.out(1.2)', force3D: true
         });
       });
 
       gsap.utils.toArray('.stat-number').forEach(el => {
         ScrollTrigger.create({
-          trigger: el, start: 'top 85%',
+          trigger: el, start: 'top 90%',
           onEnter: () => animateCounter(el)
         });
       });
