@@ -120,6 +120,7 @@ h1, h2, h3, h4 {
   transition: all var(--transition);
 }
 .nav-link:hover { background: var(--color-accent-ghost); color: var(--color-accent); }
+.nav-link.active { background: var(--color-accent-ghost); color: var(--color-accent); }
 .nav-right { display: flex; align-items: center; gap: 8px; }
 .nav-gh-link {
   display: flex; align-items: center; justify-content: center;
@@ -481,46 +482,7 @@ section[id] { perspective: 1000px; }
 .reveal { opacity: 0; transform: translateY(40px) scale(0.85); transition: all 0.7s cubic-bezier(0.34, 1.56, 0.64, 1); }
 .reveal.visible { opacity: 1; transform: translateY(0) scale(1); }
 
-/* ── Section Tabs ── */
-.section-tabs {
-  position: fixed; bottom: 24px; left: 50%;
-  transform: translateX(-50%);
-  z-index: 999;
-  display: flex; gap: 4px;
-  background: var(--glass-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  padding: 6px 8px;
-  border-radius: var(--radius-pill);
-  border: 1px solid var(--color-border);
-  box-shadow: 0 4px 24px rgba(0,0,0,0.3);
-}
-.st-tab {
-  padding: 6px 14px;
-  font-size: 12px; font-family: var(--font-mono);
-  color: var(--color-text-muted);
-  background: transparent; border: none;
-  border-radius: var(--radius-pill);
-  cursor: pointer;
-  transition: color 0.3s ease;
-  position: relative; z-index: 1;
-  white-space: nowrap;
-}
-.st-tab.active { color: var(--color-canvas); }
-.st-tab:hover { color: var(--color-text); }
-.st-indicator {
-  position: absolute; top: 6px; left: 8px;
-  height: calc(100% - 12px);
-  background: var(--color-accent);
-  border-radius: var(--radius-pill);
-  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-  z-index: 0;
-  pointer-events: none;
-}
-@media (max-width: 640px) {
-  .section-tabs { gap: 2px; padding: 4px 6px; bottom: 16px; }
-  .st-tab { padding: 4px 8px; font-size: 10px; }
-}
+
 
 /* ── Project Overlay ── */
 .full-overlay { position: fixed; inset: 0; z-index: 9000; display: none; align-items: center; justify-content: center; }

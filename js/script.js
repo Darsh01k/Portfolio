@@ -82,20 +82,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ─── SECTION TABS ───
-  const stTabs = document.querySelectorAll('.st-tab');
-  const stIndicator = document.getElementById('stIndicator');
+  // ─── NAVBAR ACTIVE SECTION ───
+  const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
   const sections = document.querySelectorAll('section[id]');
-  if (stTabs.length && sections.length) {
-    function updateActiveTab(id) {
-      stTabs.forEach(t => t.classList.toggle('active', t.dataset.section === id));
-      const active = document.querySelector('.st-tab.active');
-      if (active && stIndicator) {
-        stIndicator.style.left = active.offsetLeft + 'px';
-        stIndicator.style.width = active.offsetWidth + 'px';
-      }
-    }
-
+  if (navLinks.length && sections.length) {
     const sectionObs = new IntersectionObserver((entries) => {
       let maxVisible = 0;
       let activeId = '';
@@ -105,18 +95,13 @@ document.addEventListener('DOMContentLoaded', () => {
           activeId = entry.target.id;
         }
       });
-      if (activeId) updateActiveTab(activeId);
+      if (activeId) {
+        navLinks.forEach(link => {
+          link.classList.toggle('active', link.getAttribute('href') === '#' + activeId);
+        });
+      }
     }, { threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1] });
     sections.forEach(s => sectionObs.observe(s));
-
-    stTabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        const target = document.getElementById(tab.dataset.section);
-        if (target) target.scrollIntoView({ behavior: 'smooth' });
-      });
-    });
-
-    updateActiveTab('hero');
   }
 
   // ─── GSAP SCROLL REVEALS ───
