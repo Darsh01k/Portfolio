@@ -193,7 +193,7 @@ h1, h2, h3, h4 {
 .hero-content { text-align: center; max-width: 800px; position: relative; z-index: 2; }
 .hero-avatar { margin-bottom: 20px; display: flex; justify-content: center; }
 .hero-avatar img {
-  width: 140px; height: 140px; border-radius: 50%;
+  width: 280px; height: 280px; border-radius: 50%;
   object-fit: cover;
   border: 2px solid var(--color-accent);
   box-shadow: 0 0 30px var(--color-glow), 0 0 60px var(--color-glow);
