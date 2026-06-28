@@ -26,13 +26,13 @@ html { scroll-behavior: smooth; scroll-padding-top: 80px; }
   --color-text: #f1f1f1;
   --color-text-body: #a0a0b0;
   --color-text-muted: #6a6a7a;
-  --color-accent: #14b8a6;
-  --color-accent-hover: #0d9488;
-  --color-accent-ghost: rgba(20,184,166,0.1);
-  --color-accent-ghost-hover: rgba(20,184,166,0.18);
-  --color-accent-gradient: linear-gradient(135deg, #14b8a6, #06b6d4);
-  --color-warm: #e8a838;
-  --color-glow: rgba(20,184,166,0.08);
+  --color-accent: #e2e8f0;
+  --color-accent-hover: #f1f5f9;
+  --color-accent-ghost: rgba(226,232,240,0.08);
+  --color-accent-ghost-hover: rgba(226,232,240,0.15);
+  --color-accent-gradient: linear-gradient(135deg, #94a3b8, #e2e8f0);
+  --color-warm: #cbd5e1;
+  --color-glow: rgba(226,232,240,0.06);
   --glass-bg: rgba(10,10,15,0.75);
   --overlay-bg: rgba(6,6,10,0.92);
   --shadow-card: 0 0 0 1px rgba(255,255,255,0.05);
@@ -48,13 +48,13 @@ html { scroll-behavior: smooth; scroll-padding-top: 80px; }
   --color-text: #1a1a1a;
   --color-text-body: #4a4a5a;
   --color-text-muted: #8a8a9a;
-  --color-accent: #0d9488;
-  --color-accent-hover: #14b8a6;
-  --color-accent-ghost: rgba(13,148,136,0.08);
-  --color-accent-ghost-hover: rgba(13,148,136,0.15);
-  --color-accent-gradient: linear-gradient(135deg, #0d9488, #0891b2);
-  --color-warm: #c9941e;
-  --color-glow: rgba(13,148,136,0.06);
+  --color-accent: #475569;
+  --color-accent-hover: #334155;
+  --color-accent-ghost: rgba(71,85,105,0.08);
+  --color-accent-ghost-hover: rgba(71,85,105,0.15);
+  --color-accent-gradient: linear-gradient(135deg, #64748b, #475569);
+  --color-warm: #64748b;
+  --color-glow: rgba(71,85,105,0.06);
   --glass-bg: rgba(245,245,240,0.8);
   --overlay-bg: rgba(245,245,240,0.95);
   --shadow-card: 0 0 0 1px rgba(0,0,0,0.06);
@@ -180,8 +180,8 @@ h1, h2, h3, h4 {
 .hero-grid {
   position: fixed; inset: 0; z-index: 0;
   background-image:
-    linear-gradient(rgba(20,184,166,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(20,184,166,0.03) 1px, transparent 1px);
+    linear-gradient(rgba(148,163,184,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148,163,184,0.04) 1px, transparent 1px);
   background-size: 60px 60px;
   animation: gridMove 8s linear infinite;
   pointer-events: none;
@@ -320,9 +320,9 @@ h1, h2, h3, h4 {
 .btn-warm {
   background: transparent;
   color: var(--color-warm);
-  border: 1px solid rgba(232,168,56,0.25);
+  border: 1px solid rgba(148,163,184,0.25);
 }
-.btn-warm:hover { background: rgba(232,168,56,0.08); border-color: var(--color-warm); transform: translateY(-2px); }
+.btn-warm:hover { background: rgba(148,163,184,0.08); border-color: var(--color-warm); transform: translateY(-2px); }
 
 /* ── Sections ── */
 .section { padding: 100px 24px; position: relative; z-index: 1; perspective: 1000px; }
@@ -520,7 +520,7 @@ section[id] { perspective: 1000px; }
 .sp-dot.active {
   background: var(--color-accent);
   border-color: var(--color-accent-ghost);
-  box-shadow: 0 0 12px rgba(20,184,166,0.3);
+  box-shadow: 0 0 12px rgba(148,163,184,0.2);
 }
 .sp-label {
   position: absolute; right: 18px; top: 50%;
@@ -637,10 +637,10 @@ section[id] { perspective: 1000px; }
 .diagram-node .node-sublabel { display: block; font-size: 11px; color: var(--color-text-muted); margin-top: 2px; }
 .diagram-node:hover { border-color: var(--color-accent); background: var(--color-accent-ghost); transform: translateY(-3px); }
 .diagram-node.accent-1 { border-color: var(--color-accent); background: var(--color-accent-ghost); }
-.diagram-node.accent-2 { border-color: rgba(6,182,212,0.3); background: rgba(6,182,212,0.06); }
-.diagram-node.accent-3 { border-color: var(--color-warm); background: rgba(232,168,56,0.06); }
-.diagram-node.accent-4 { border-color: rgba(236,72,153,0.3); background: rgba(236,72,153,0.06); }
-.diagram-node.accent-5 { border-color: rgba(251,191,36,0.3); background: rgba(251,191,36,0.06); }
+.diagram-node.accent-2 { border-color: rgba(148,163,184,0.3); background: rgba(148,163,184,0.06); }
+.diagram-node.accent-3 { border-color: rgba(148,163,184,0.25); background: rgba(148,163,184,0.06); }
+.diagram-node.accent-4 { border-color: rgba(148,163,184,0.2); background: rgba(148,163,184,0.04); }
+.diagram-node.accent-5 { border-color: rgba(148,163,184,0.15); background: rgba(148,163,184,0.03); }
 .diagram-arrow { display: flex; align-items: center; color: var(--color-text-muted); font-size: 1rem; animation: arrowFlow 1.5s ease-in-out infinite; flex-shrink: 0; }
 @keyframes arrowFlow { 0%,100% { opacity: 0.4; transform: translateX(0); } 50% { opacity: 1; transform: translateX(4px); } }
 .diagram-flow { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 8px; flex-wrap: wrap; margin-top: 8px; }
