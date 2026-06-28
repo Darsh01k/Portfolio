@@ -376,6 +376,7 @@ section[id] { perspective: 1000px; }
 .edu-body h3 { font-size: 1rem; font-weight: 500; margin-bottom: 4px; }
 .edu-org { color: var(--color-text-body); font-size: 14px; margin-bottom: 4px; }
 .edu-date { color: var(--color-text-muted); font-size: 13px; font-family: var(--font-mono); }
+.edu-desc { color: var(--color-text-body); font-size: 14px; line-height: 1.6; margin-top: 6px; }
 
 /* ── Skills ── */
 .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }

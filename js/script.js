@@ -492,7 +492,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const resumeEmbed = document.getElementById('resumeEmbedDrawer');
 
   window.openResumeViewer = function() {
-    resumeEmbed.src = 'assets/resume/Darsh%20updated.pdf';
+    resumeEmbed.src = 'assets/resume/final%20Resume.pdf';
     resumeDrawer.classList.add('active');
     resumeBackdrop.classList.add('active');
     document.body.style.overflow = 'hidden';
