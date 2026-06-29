@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
         tl.from(header.querySelector('.section-title'), { opacity: 0, y: 10, duration: 0.2 }, '-=0.1');
       });
 
-      gsap.utils.toArray('.about-card, .about-info, .project-card, .edu-card, .skill-category, .contact-card').forEach((el, i) => {
+      gsap.utils.toArray('.about-card, .about-info, .project-card, .edu-card, .cert-card, .skill-category, .contact-card').forEach((el, i) => {
         gsap.from(el, {
           scrollTrigger: { trigger: el, start: 'top 92%', toggleActions: 'play none none none' },
           scale: 0.6, y: 50, opacity: 0, rotateX: 6,
@@ -139,14 +139,14 @@ document.addEventListener('DOMContentLoaded', () => {
       window.addEventListener('load', () => ScrollTrigger.refresh());
     } catch (e) {
       console.warn('GSAP error:', e);
-      const revealEls = document.querySelectorAll('.about-card, .about-info, .project-card, .edu-card, .skill-category, .contact-card, .section-header');
+      const revealEls = document.querySelectorAll('.about-card, .about-info, .project-card, .edu-card, .cert-card, .skill-category, .contact-card, .section-header');
       const obs = new IntersectionObserver((entries) => {
         entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('reveal', 'visible'); obs.unobserve(entry.target); } });
       }, { threshold: 0.1 });
       revealEls.forEach(el => { el.classList.add('reveal'); obs.observe(el); });
     }
   } else {
-    const revealEls = document.querySelectorAll('.about-card, .about-info, .project-card, .edu-card, .skill-category, .contact-card, .section-header');
+    const revealEls = document.querySelectorAll('.about-card, .about-info, .project-card, .edu-card, .cert-card, .skill-category, .contact-card, .section-header');
     const obs = new IntersectionObserver((entries) => {
       entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('reveal', 'visible'); obs.unobserve(entry.target); } });
     }, { threshold: 0.1 });
