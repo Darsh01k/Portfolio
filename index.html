@@ -15,7 +15,7 @@
   <meta name="twitter:title" content="Darsh Yadav | Portfolio">
   <meta name="twitter:description" content="Computer Science Engineer & Full-Stack Developer — from fact-checking platforms to healthcare ecosystems.">
   <meta name="twitter:image" content="https://darsh-dev.vercel.app/assets/images/og-image.png">
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/styles.css?v=2">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -554,6 +554,6 @@
   <script>
     (function(){'use strict';var D={sparkColor:'#ffd700',sparkSize:30,sparkRadius:50,sparkCount:12,duration:900,easing:'ease-out',extraScale:1};var E={linear:function(t){return t},'ease-in':function(t){return t*t},'ease-in-out':function(t){return t<0.5?2*t*t:-1+(4-2*t)*t},'ease-out':function(t){return t*(2-t)}};function g(n){return E[n]||E['ease-out']}var x=document.createElement('div');x.id='clickspark-container';x.style.cssText='position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:9999';document.body.appendChild(x);var v=document.createElement('canvas');v.style.cssText='width:100%;height:100%;display:block';x.appendChild(v);var k=v.getContext('2d');var w=[];var u=null;var f=Object.assign({},D);function z(){v.width=window.innerWidth;v.height=window.innerHeight}window.addEventListener('resize',z);z();function y(t){k.clearRect(0,0,v.width,v.height);w=w.filter(function(s){var e=t-s.startTime;if(e>=f.duration)return false;var p=e/f.duration;var a=f._ease(p);var d=a*f.sparkRadius*f.extraScale;var l=f.sparkSize*(1-a);var x1=s.x+d*Math.cos(s.angle);var y1=s.y+d*Math.sin(s.angle);var x2=s.x+(d+l)*Math.cos(s.angle);var y2=s.y+(d+l)*Math.sin(s.angle);k.strokeStyle=f.sparkColor;k.lineWidth=2;k.beginPath();k.moveTo(x1,y1);k.lineTo(x2,y2);k.stroke();return true});if(w.length>0){u=requestAnimationFrame(y)}else{u=null}}function h(e){var n=performance.now();var i;for(i=0;i<f.sparkCount;i++){w.push({x:e.clientX,y:e.clientY,angle:(2*Math.PI*i)/f.sparkCount,startTime:n})}if(!u){u=requestAnimationFrame(y)}}document.addEventListener('click',h);window.initClickSpark=function(o){if(o){Object.keys(o).forEach(function(k){f[k]=o[k]})}f._ease=g(f.easing)};f._ease=g(f.easing)})();
   </script>
-  <script src="js/script.js"></script>
+  <script src="js/script.js?v=2"></script>
 </body>
 </html>
