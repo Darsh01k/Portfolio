@@ -1,11 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-  const moduleScript = document.createElement('script');
-  moduleScript.type = 'module';
-  moduleScript.src = 'js/particles-init.js';
-  moduleScript.onerror = () => console.warn('Particles module failed to load');
-  document.body.appendChild(moduleScript);
-
   // ─── THEME TOGGLE ───
   const html = document.documentElement;
   const themeToggle = document.getElementById('themeToggle');
