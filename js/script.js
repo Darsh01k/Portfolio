@@ -1,13 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-  // ─── LOAD PARTICLES & CLICKSPARK DYNAMICALLY ───
-  ['js/particles.js', 'js/clickspark.js'].forEach(function (src) {
-    var s = document.createElement('script');
-    s.src = src;
-    s.onerror = function () { console.warn('Failed to load ' + src); };
-    document.body.appendChild(s);
-  });
-
   // ─── THEME TOGGLE ───
   const html = document.documentElement;
   const themeToggle = document.getElementById('themeToggle');
