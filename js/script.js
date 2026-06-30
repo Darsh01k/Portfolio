@@ -3,6 +3,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const siteContent = document.getElementById('site-content');
   if (siteContent) siteContent.style.opacity = '1';
 
+  const moduleScript = document.createElement('script');
+  moduleScript.type = 'module';
+  moduleScript.src = 'js/particles-init.js';
+  moduleScript.onerror = () => console.warn('Particles module failed to load');
+  document.body.appendChild(moduleScript);
+
   // ─── THEME TOGGLE ───
   const html = document.documentElement;
   const themeToggle = document.getElementById('themeToggle');
