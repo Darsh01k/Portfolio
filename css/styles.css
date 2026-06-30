@@ -658,7 +658,7 @@ section[id] { perspective: 1000px; }
   pointer-events: none;
 }
 
-#lightrays-bg {
+#siderays-bg {
   position: absolute;
   inset: 0;
   z-index: 0;
