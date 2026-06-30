@@ -153,6 +153,29 @@ document.addEventListener('DOMContentLoaded', () => {
     revealEls.forEach(el => { el.classList.add('reveal'); obs.observe(el); });
   }
 
+  // ─── ANIME SKILL TAG STAGGER ───
+  if (typeof anime !== 'undefined') {
+    const skillObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const tags = entry.target.querySelectorAll('.skill-tag');
+          if (tags.length) {
+            anime({
+              targets: tags,
+              translateY: [24, 0],
+              opacity: [0, 1],
+              scale: [0.85, 1],
+              easing: 'spring(1, 80, 10, 0)',
+              delay: anime.stagger(50),
+            });
+          }
+          skillObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    document.querySelectorAll('.skill-category').forEach(card => skillObserver.observe(card));
+  }
+
   // ─── PROJECT CARD CLICKS ───
   document.querySelectorAll('.project-card').forEach(card => {
     card.addEventListener('click', function(e) {
