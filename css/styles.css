@@ -645,6 +645,13 @@ section[id] { perspective: 1000px; }
   .contact-grid { grid-template-columns: 1fr; }
 }
 
+#particles-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--color-canvas); }
 ::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 3px; }
