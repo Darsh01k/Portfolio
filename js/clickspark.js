@@ -4,10 +4,10 @@
   function setup() {
     var defaults = {
       sparkColor: '#ffd700',
-      sparkSize: 10,
-      sparkRadius: 15,
-      sparkCount: 8,
-      duration: 400,
+      sparkSize: 30,
+      sparkRadius: 40,
+      sparkCount: 10,
+      duration: 800,
       easing: 'ease-out',
       extraScale: 1
     };
