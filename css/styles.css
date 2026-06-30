@@ -488,7 +488,7 @@ section[id] { perspective: 1000px; }
 /* ── Resume Section ── */
 .resume-section-content { display: flex; flex-direction: column; align-items: center; gap: 24px; }
 .resume-section-embed { width: 100%; max-width: 800px; height: 80vh; border-radius: var(--radius-lg); overflow: hidden; background: white; }
-.resume-section-embed embed { width: 100%; height: 100%; border: none; }
+.resume-section-embed iframe { width: 100%; height: 100%; border: none; }
 .resume-section-actions { display: flex; gap: 12px; }
 
 /* ── Footer ── */
@@ -579,7 +579,7 @@ section[id] { perspective: 1000px; }
 .resume-drawer-close { display: flex; align-items: center; gap: 8px; padding: 8px 16px; background: transparent; border: 1px solid var(--color-border); border-radius: var(--radius-md); color: var(--color-text-muted); font-family: var(--font-body); font-size: 13px; cursor: pointer; transition: all var(--transition); }
 .resume-drawer-close:hover { border-color: var(--color-accent); color: var(--color-accent); }
 .resume-embed-wrap { flex: 1; border-radius: var(--radius-lg); overflow: hidden; background: white; }
-.resume-embed-wrap embed { width: 100%; height: 100%; border: none; }
+.resume-embed-wrap iframe { width: 100%; height: 100%; border: none; }
 
 /* ── Back to Top ── */
 .back-to-top { position: fixed; bottom: 32px; right: 32px; z-index: 800; width: 48px; height: 48px; background: var(--glass-bg); backdrop-filter: blur(12px); border: 1px solid var(--color-border); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; transform: translateY(20px); pointer-events: none; transition: all var(--transition); }
