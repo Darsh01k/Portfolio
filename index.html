@@ -3,27 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com https://esm.sh; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://formspree.io; frame-src 'self';">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com https://esm.sh; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://formspree.io; frame-src 'self'; form-action 'self' https://formspree.io; base-uri 'self'; object-src 'none';">
   <title>Darsh Yadav | Portfolio</title>
   <meta property="og:title" content="Darsh Yadav | Portfolio">
   <meta property="og:description" content="Computer Science Engineer & Full-Stack Developer — building intelligent systems with AI and web technologies.">
-  <meta property="og:image" content="https://clipcheck-ai.vercel.app/og-image.png">
+  <meta property="og:image" content="https://darsh-dev.vercel.app/assets/images/og-image.png">
   <meta property="og:url" content="https://darsh-dev.vercel.app">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Darsh Yadav Portfolio">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Darsh Yadav | Portfolio">
   <meta name="twitter:description" content="Computer Science Engineer & Full-Stack Developer — from fact-checking platforms to healthcare ecosystems.">
-  <meta name="twitter:image" content="https://clipcheck-ai.vercel.app/og-image.png">
+  <meta name="twitter:image" content="https://darsh-dev.vercel.app/assets/images/og-image.png">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>DY</text></svg>">
   <!-- GSAP -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha384-83835387f22fe4f3d4e313f28445aa3dcc2d3573af75a0c8f0b2e7c987f23593a32897984328f343d5f9dbbe5e063a6d" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha384-6774446b3efd97621a019a89b12001b536e18e0394632577a7dd1736700f0921e0dc4313cf57e8bae9eaf56651b63ddd" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js" integrity="sha384-fcc73fd9f7c8098304f78c1c3ce630a0bf7d233a5bbc5b034edcb4ff9579b76db1da7dbab69f09452b312a3be066e66c" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
 
@@ -408,6 +408,7 @@
             <label for="cfMessage">Message</label>
             <textarea id="cfMessage" name="message" rows="5" required placeholder="Write your message here..." maxlength="5000"></textarea>
           </div>
+          <input type="text" name="_hp" tabindex="-1" autocomplete="off" class="hp-field" aria-hidden="true">
           <button type="submit" class="btn btn-primary cf-submit">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
             Send Message

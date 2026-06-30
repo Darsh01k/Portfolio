@@ -652,6 +652,8 @@ section[id] { perspective: 1000px; }
   pointer-events: none;
 }
 
+.hp-field { position: absolute; left: -9999px; opacity: 0; height: 0; overflow: hidden; }
+
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--color-canvas); }
 ::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 3px; }

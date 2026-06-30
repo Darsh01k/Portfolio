@@ -236,6 +236,12 @@ document.addEventListener('DOMContentLoaded', () => {
     contactForm.addEventListener('submit', function(e) {
       e.preventDefault();
       if (cfError) cfError.classList.remove('visible');
+      const hp = this.querySelector('input[name="_hp"]');
+      if (hp && hp.value) {
+        if (cfSuccess) cfSuccess.classList.add('visible');
+        this.reset();
+        return;
+      }
       const data = new FormData(this);
       fetch(this.action, {
         method: 'POST',
