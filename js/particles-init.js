@@ -4,7 +4,7 @@ const container = document.getElementById('particles-bg');
 if (container) {
   initParticles(container, {
     particleColors: ['#ffffff'],
-    particleCount: 200,
+    particleCount: 400,
     particleSpread: 10,
     speed: 0.1,
     moveParticlesOnHover: false,
