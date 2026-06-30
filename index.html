@@ -389,20 +389,20 @@
           <div class="cf-row">
             <div class="cf-field">
               <label for="cfName">Name</label>
-              <input type="text" id="cfName" name="name" required placeholder="Your name" maxlength="100" pattern="[A-Za-zÀ-ÿ\s\-']+" title="Letters and spaces only">
+              <input type="text" id="cfName" name="name" autocomplete="name" required placeholder="Your name" maxlength="100" pattern="[A-Za-zÀ-ÿ\s\-']+" title="Letters and spaces only">
             </div>
             <div class="cf-field">
               <label for="cfEmail">Email</label>
-              <input type="email" id="cfEmail" name="email" required placeholder="your@email.com" maxlength="254">
+              <input type="email" id="cfEmail" name="email" autocomplete="email" required placeholder="your@email.com" maxlength="254">
             </div>
           </div>
           <div class="cf-field">
             <label for="cfSubject">Subject</label>
-            <input type="text" id="cfSubject" name="subject" required placeholder="What's this about?" maxlength="200">
+            <input type="text" id="cfSubject" name="subject" autocomplete="off" required placeholder="What's this about?" maxlength="200">
           </div>
           <div class="cf-field">
             <label for="cfMessage">Message</label>
-            <textarea id="cfMessage" name="message" rows="5" required placeholder="Write your message here..." maxlength="5000"></textarea>
+            <textarea id="cfMessage" name="message" autocomplete="off" rows="5" required placeholder="Write your message here..." maxlength="5000"></textarea>
           </div>
           <input type="text" name="_hp" tabindex="-1" autocomplete="off" class="hp-field" aria-hidden="true">
           <button type="submit" class="btn btn-primary cf-submit">
