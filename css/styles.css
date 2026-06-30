@@ -618,7 +618,7 @@ section[id] { perspective: 1000px; }
 @keyframes vconnPulse { 0%,100% { opacity: 0.3; } 50% { opacity: 0.7; } }
 
 /* ── Site Content ── */
-#site-content { opacity: 0; will-change: transform, opacity; }
+#site-content { will-change: transform, opacity; }
 
 /* ── Responsive ── */
 @media (max-width: 768px) {
