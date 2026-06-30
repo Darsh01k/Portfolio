@@ -658,14 +658,6 @@ section[id] { perspective: 1000px; }
   pointer-events: none;
 }
 
-#siderays-bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  overflow: hidden;
-}
-
 .hp-field { position: absolute; left: -9999px; opacity: 0; height: 0; overflow: hidden; }
 
 ::-webkit-scrollbar { width: 6px; }
